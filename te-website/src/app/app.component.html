@@ -1,346 +1,237 @@
-<style>
-  :host {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-    font-size: 14px;
-    color: #333;
-    box-sizing: border-box;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
-
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    margin: 8px 0;
-  }
-
-  p {
-    margin: 0;
-  }
-
-  .spacer {
-    flex: 1;
-  }
-
-  .toolbar {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 60px;
-    display: flex;
-    align-items: center;
-    background-color: #1976d2;
-    color: white;
-    font-weight: 600;
-  }
-
-  .toolbar img {
-    margin: 0 16px;
-  }
-
-  .toolbar #twitter-logo {
-    height: 40px;
-    margin: 0 8px;
-  }
-
-  .toolbar #youtube-logo {
-    height: 40px;
-    margin: 0 16px;
-  }
-
-  .toolbar #twitter-logo:hover,
-  .toolbar #youtube-logo:hover {
-    opacity: 0.8;
-  }
-
-  .content {
-    display: flex;
-    margin: 82px auto 32px;
-    padding: 0 16px;
-    max-width: 960px;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  svg.material-icons {
-    height: 24px;
-    width: auto;
-  }
-
-  svg.material-icons:not(:last-child) {
-    margin-right: 8px;
-  }
-
-  .card svg.material-icons path {
-    fill: #888;
-  }
-
-  .card-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    margin-top: 16px;
-  }
-
-  .card {
-    all: unset;
-    border-radius: 4px;
-    border: 1px solid #eee;
-    background-color: #fafafa;
-    height: 40px;
-    width: 200px;
-    margin: 0 8px 16px;
-    padding: 16px;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    transition: all 0.2s ease-in-out;
-    line-height: 24px;
-  }
-
-  .card-container .card:not(:last-child) {
-    margin-right: 0;
-  }
-
-  .card.card-small {
-    height: 16px;
-    width: 168px;
-  }
-
-  .card-container .card:not(.highlight-card) {
-    cursor: pointer;
-  }
-
-  .card-container .card:not(.highlight-card):hover {
-    transform: translateY(-3px);
-    box-shadow: 0 4px 17px rgba(0, 0, 0, 0.35);
-  }
-
-  .card-container .card:not(.highlight-card):hover .material-icons path {
-    fill: rgb(105, 103, 103);
-  }
-
-  .card.highlight-card {
-    background-color: #1976d2;
-    color: white;
-    font-weight: 600;
-    border: none;
-    width: auto;
-    min-width: 30%;
-    position: relative;
-  }
-
-  .card.card.highlight-card span {
-    margin-left: 60px;
-  }
-
-  svg#rocket {
-    width: 80px;
-    position: absolute;
-    left: -10px;
-    top: -24px;
-  }
-
-  svg#rocket-smoke {
-    height: calc(100vh - 95px);
-    position: absolute;
-    top: 10px;
-    right: 180px;
-    z-index: -10;
-  }
-
-  a,
-  a:visited,
-  a:hover {
-    color: #1976d2;
-    text-decoration: none;
-  }
-
-  a:hover {
-    color: #125699;
-  }
-
-  .terminal {
-    position: relative;
-    width: 80%;
-    max-width: 600px;
-    border-radius: 6px;
-    padding-top: 45px;
-    margin-top: 8px;
-    overflow: hidden;
-    background-color: rgb(15, 15, 16);
-  }
-
-  .terminal::before {
-    content: "\2022 \2022 \2022";
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 4px;
-    background: rgb(58, 58, 58);
-    color: #c2c3c4;
-    width: 100%;
-    font-size: 2rem;
-    line-height: 0;
-    padding: 14px 0;
-    text-indent: 4px;
-  }
-
-  .terminal pre {
-    font-family: SFMono-Regular, Consolas, Liberation Mono, Menlo, monospace;
-    color: white;
-    padding: 0 1rem 1rem;
-    margin: 0;
-  }
-
-  .circle-link {
-    height: 40px;
-    width: 40px;
-    border-radius: 40px;
-    margin: 8px;
-    background-color: white;
-    border: 1px solid #eeeeee;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-    transition: 1s ease-out;
-  }
-
-  .circle-link:hover {
-    transform: translateY(-0.25rem);
-    box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.2);
-  }
-
-  footer {
-    background-color: #888;
-    bottom: 0;
-    color: white;
-    display: block;
-    padding: 3px;
-    position: absolute;
-    text-align: center;
-    width: 100%;
-  }
-
-  footer a {
-    display: flex;
-    align-items: center;
-  }
-
-  .github-star-badge {
-    color: #24292e;
-    display: flex;
-    align-items: center;
-    font-size: 12px;
-    padding: 3px 10px;
-    border: 1px solid rgba(27, 31, 35, .2);
-    border-radius: 3px;
-    background-image: linear-gradient(-180deg, #fafbfc, #eff3f6 90%);
-    margin-left: 4px;
-    font-weight: 600;
-  }
-
-  .github-star-badge:hover {
-    background-image: linear-gradient(-180deg, #f0f3f6, #e6ebf1 90%);
-    border-color: rgba(27, 31, 35, .35);
-    background-position: -.5em;
-  }
-
-  .github-star-badge .material-icons {
-    height: 16px;
-    width: 16px;
-    margin-right: 4px;
-  }
-
-  svg#clouds {
-    position: fixed;
-    bottom: -160px;
-    left: -230px;
-    z-index: -10;
-    width: 1920px;
-  }
-
-  /* Responsive Styles */
-  @media screen and (max-width: 767px) {
-
-    .card-container>*:not(.circle-link),
-    .terminal {
-      width: 100%;
-    }
-
-    .card:not(.highlight-card) {
-      height: 16px;
-      margin: 8px 0;
-    }
-
-    .card.highlight-card span {
-      margin-left: 72px;
-    }
-
-    svg#rocket-smoke {
-      right: 120px;
-      transform: rotate(-5deg);
-    }
-  }
-
-  @media screen and (max-width: 575px) {
-    svg#rocket-smoke {
-      display: none;
-      visibility: hidden;
-    }
-  }
-</style>
-<!-- Toolbar -->
-<div class="toolbar" role="banner">
-  <!-- <img
-    width="40"
-    alt="Angular Logo"
-    src="../assets/logo1.jpeg"
-  /> -->
-  <span></span>
-  <div class="spacer"></div>
-  <!-- <a aria-label="Angular on twitter" target="_blank" rel="noopener" href="https://twitter.com/angular" title="Twitter">
-      <svg id="twitter-logo" height="24" data-name="Logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
-        <rect width="400" height="400" fill="none"/>
-        <path d="M153.62,301.59c94.34,0,145.94-78.16,145.94-145.94,0-2.22,0-4.43-.15-6.63A104.36,104.36,0,0,0,325,122.47a102.38,102.38,0,0,1-29.46,8.07,51.47,51.47,0,0,0,22.55-28.37,102.79,102.79,0,0,1-32.57,12.45,51.34,51.34,0,0,0-87.41,46.78A145.62,145.62,0,0,1,92.4,107.81a51.33,51.33,0,0,0,15.88,68.47A50.91,50.91,0,0,1,85,169.86c0,.21,0,.43,0,.65a51.31,51.31,0,0,0,41.15,50.28,51.21,51.21,0,0,1-23.16.88,51.35,51.35,0,0,0,47.92,35.62,102.92,102.92,0,0,1-63.7,22A104.41,104.41,0,0,1,75,278.55a145.21,145.21,0,0,0,78.62,23" fill="#fff"/>
-      </svg>
-    </a>
-    <a aria-label="Angular on YouTube" target="_blank" rel="noopener" href="https://youtube.com/angular" title="YouTube">
-      <svg id="youtube-logo" height="24" width="24" data-name="Logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#fff">
-        <path d="M0 0h24v24H0V0z" fill="none"/>
-        <path d="M21.58 7.19c-.23-.86-.91-1.54-1.77-1.77C18.25 5 12 5 12 5s-6.25 0-7.81.42c-.86.23-1.54.91-1.77 1.77C2 8.75 2 12 2 12s0 3.25.42 4.81c.23.86.91 1.54 1.77 1.77C5.75 19 12 19 12 19s6.25 0 7.81-.42c.86-.23 1.54-.91 1.77-1.77C22 15.25 22 12 22 12s0-3.25-.42-4.81zM10 15V9l5.2 3-5.2 3z"/>
-      </svg>
-    </a> -->
-</div>
-<div class="content" role="main">
-  <h1>Tech Everyday</h1>
-  <h2>Website Under Construction</h2>
-  <div>We do software consulting, want to chat? <a href="mailto: info@tech-everyday.com" target="_blank">Shoot us an
-      email!</a></div>
-  <!-- Footer -->
-  <footer>
-    <h2>Contact us:</h2>
-    <div class="card-container">
-      Email:&nbsp;<a href="mailto: info@tech-everyday.com" target="_blank">info@tech-everyday.com</a>
-      &nbsp;|
-      Phone: +1 612 559 0640
-      &nbsp;|
-      Hours: 9AM - 5PM CST
+<div class="te-root" id="top">
+  <!-- NAV -->
+  <header class="te-nav">
+    <div class="te-wrap te-navinner">
+      <a class="te-brand" href="#top"><span class="te-dot"></span>Tech Everyday</a>
+      <nav class="te-links">
+        <a href="#services">Services</a>
+        <a href="#work">Work</a>
+        <a href="#stack">Stack</a>
+        <a href="#about">About</a>
+        <a href="#writing">Writing</a>
+        <a class="btn btn-primary" href="#contact" style="color:var(--color-accent)">Start a project</a>
+      </nav>
+      <button class="te-burger" (click)="toggleMenu()" aria-label="Menu">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg>
+      </button>
     </div>
-    <div class="card-container">Tech Everyday LLC © 2023</div>
+    <nav class="te-mobile" *ngIf="menuOpen">
+      <a href="#services" (click)="closeMenu()">Services</a>
+      <a href="#work" (click)="closeMenu()">Work</a>
+      <a href="#stack" (click)="closeMenu()">Stack</a>
+      <a href="#about" (click)="closeMenu()">About</a>
+      <a href="#writing" (click)="closeMenu()">Writing</a>
+      <a href="#contact" (click)="closeMenu()" style="color:var(--color-accent);border-bottom:none">Start a project →</a>
+    </nav>
+  </header>
+
+  <!-- HERO + BENTO -->
+  <section class="te-hero" style="padding:44px 0 8px">
+    <div class="te-glow"></div>
+    <div class="te-wrap">
+      <span class="te-kick">Full-stack software studio · Minnesota</span>
+      <h1 style="font-size:clamp(34px,4.6vw,56px);line-height:1.05;letter-spacing:-.025em;margin:16px 0 0;max-width:760px">Ship reliable web apps — without hiring a whole team.</h1>
+      <p class="te-lede" style="max-width:560px;margin:20px 0 0">Tech Everyday is a one-person studio building and shipping production software for founders, small businesses, and agencies who need senior full-stack work done right.</p>
+    </div>
+    <div class="te-wrap" style="margin-top:36px">
+      <div class="te-bento">
+        <div class="card elev-sm sp2 sp2r" style="justify-content:space-between;background:linear-gradient(150deg,var(--color-section),var(--color-surface));min-height:260px">
+          <span class="card-kicker">Tech Everyday LLC</span>
+          <div>
+            <h3 style="font-size:23px;margin:0 0 10px;line-height:1.2">One senior engineer, front end to database.</h3>
+            <p style="color:var(--color-neutral-300);font-size:14px;margin:0">Product builds, backend APIs, modern front ends, and practical AI — from the first wireframe to production and beyond.</p>
+          </div>
+          <div style="display:flex;gap:10px;flex-wrap:wrap">
+            <a class="btn btn-primary" href="#contact" style="color:var(--color-accent)">Start a project</a>
+            <a class="btn btn-secondary" href="#work">See the work</a>
+          </div>
+        </div>
+        <div class="card elev-sm" style="justify-content:space-between">
+          <span class="card-kicker">Availability</span>
+          <div><div style="font:500 30px/1 var(--font-heading);color:var(--color-text)">Q3 2026</div><div class="card-meta" style="margin-top:6px"><span class="te-dot" style="width:7px;height:7px"></span>Booking new work</div></div>
+        </div>
+        <div class="card elev-sm" style="justify-content:space-between">
+          <span class="card-kicker">Experience</span>
+          <div><div style="font:500 30px/1 var(--font-heading);color:var(--color-text)">10+ yrs</div><div class="card-meta" style="margin-top:6px">Shipping production</div></div>
+        </div>
+        <div class="card elev-sm sp2" style="justify-content:space-between">
+          <span class="card-kicker">Reply time</span>
+          <div style="display:flex;align-items:baseline;gap:12px"><span style="font:500 30px/1 var(--font-heading);color:var(--color-text)">&lt; 1 day</span><span class="card-meta">on new inquiries</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section class="te-sec" id="services">
+    <div class="te-wrap">
+      <span class="te-kick">Services</span>
+      <h2 style="font-size:clamp(26px,3vw,34px);margin:12px 0 6px">End-to-end, or wherever you need a hand.</h2>
+      <p class="text-muted" style="max-width:520px;margin-bottom:30px">Four ways I plug into a team. Take the whole build or just the part you're missing.</p>
+      <div class="te-g4">
+        <div class="card elev-sm">
+          <div class="te-svc-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><polyline points="8 7 3 12 8 17"/><polyline points="16 7 21 12 16 17"/></svg></div>
+          <div class="card-title">Web app development</div>
+          <p class="card-body">Full lifecycle product builds — architecture, implementation, launch, then iteration.</p>
+        </div>
+        <div class="card elev-sm">
+          <div class="te-svc-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="7" rx="1.5"/><rect x="3" y="13" width="18" height="7" rx="1.5"/><line x1="7" y1="7.5" x2="7.02" y2="7.5"/><line x1="7" y1="16.5" x2="7.02" y2="16.5"/></svg></div>
+          <div class="card-title">APIs &amp; backend</div>
+          <p class="card-body">Dependable services, data models, and integrations in .NET / C# and Node.</p>
+        </div>
+        <div class="card elev-sm">
+          <div class="te-svc-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="7" y1="6.5" x2="7.02" y2="6.5"/></svg></div>
+          <div class="card-title">Front-end engineering</div>
+          <p class="card-body">Fast, accessible interfaces in Vue, Angular, and TypeScript.</p>
+        </div>
+        <div class="card elev-sm">
+          <div class="te-svc-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.7 6.3L20 11l-6.3 1.7L12 19l-1.7-6.3L4 11l6.3-1.7z"/></svg></div>
+          <div class="card-title">AI &amp; agentic features</div>
+          <p class="card-body">Practical LLM and agent workflows built into products people actually use.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WORK -->
+  <section class="te-sec" id="work" style="padding-top:0">
+    <div class="te-wrap">
+      <div style="display:flex;align-items:baseline;justify-content:space-between;gap:16px;flex-wrap:wrap">
+        <div><span class="te-kick">Selected work</span><h2 style="font-size:clamp(26px,3vw,34px);margin:12px 0 0">Things I've designed and shipped.</h2></div>
+        <a class="btn btn-ghost" href="https://github.com/viraphilavong" target="_blank" rel="noopener" style="color:var(--color-accent)">GitHub →</a>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:9px;margin:24px 0 26px">
+        <button class="te-chip" *ngFor="let c of categories" [attr.aria-current]="filter === c" (click)="setFilter(c)">{{ c }}</button>
+      </div>
+      <div class="te-g3">
+        <a class="card elev-sm te-proj" *ngFor="let p of filteredProjects" [href]="p.href" target="_blank" rel="noopener">
+          <div class="te-swatch">{{ p.label }}</div>
+          <span class="card-kicker">{{ p.cat }}</span>
+          <div class="card-title">{{ p.name }}</div>
+          <p class="card-body">{{ p.blurb }}</p>
+          <div class="card-meta te-mono">{{ p.tags }}</div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- STACK -->
+  <section class="te-sec" id="stack" style="padding-top:0">
+    <div class="te-wrap">
+      <div class="card elev-sm" style="padding:30px">
+        <span class="te-kick">Stack</span>
+        <h2 style="font-size:clamp(24px,2.6vw,30px);margin:12px 0 18px;max-width:640px">A pragmatic toolkit, chosen to ship and to last.</h2>
+        <div style="display:flex;flex-wrap:wrap;gap:10px">
+          <span class="tag tag-neutral">C# / .NET</span><span class="tag tag-neutral">TypeScript</span><span class="tag tag-neutral">Vue</span><span class="tag tag-neutral">Angular</span><span class="tag tag-neutral">Ionic</span><span class="tag tag-neutral">Node</span><span class="tag tag-accent">Agentic AI</span><span class="tag tag-neutral">PostgreSQL</span><span class="tag tag-neutral">SQL Server</span><span class="tag tag-neutral">Azure</span><span class="tag tag-neutral">Docker</span><span class="tag tag-neutral">Git</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="te-sec" id="about" style="padding-top:0">
+    <div class="te-wrap te-g2" style="align-items:center">
+      <div>
+        <span class="te-kick">About</span>
+        <h2 style="font-size:clamp(26px,3vw,34px);margin:12px 0 16px">Hi, I'm Alexander — the engineer behind Tech Everyday.</h2>
+        <p class="te-lede" style="margin:0 0 14px">I'm a fullstack software engineer based in Minnesota with 10+ years building web and mobile products across the stack — C#/.NET services, TypeScript front ends in Vue and Angular, and increasingly, agentic AI.</p>
+        <p style="color:var(--color-neutral-300);margin:0 0 22px">Tech Everyday LLC is how I take on focused client work: senior engineering without the agency overhead, for teams that want something built properly and shipped.</p>
+        <div style="display:flex;gap:10px;flex-wrap:wrap">
+          <a class="te-social" href="https://github.com/viraphilavong" target="_blank" rel="noopener" aria-label="Personal GitHub"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.58 2 12.25c0 4.53 2.87 8.37 6.84 9.73.5.1.68-.22.68-.49 0-.24-.01-.87-.01-1.71-2.78.62-3.37-1.37-3.37-1.37-.45-1.18-1.11-1.49-1.11-1.49-.91-.64.07-.63.07-.63 1 .07 1.53 1.06 1.53 1.06.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.37-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.71 0 0 .84-.28 2.75 1.05a9.36 9.36 0 0 1 2.5-.34c.85 0 1.71.12 2.5.34 1.91-1.33 2.75-1.05 2.75-1.05.55 1.41.2 2.45.1 2.71.64.72 1.03 1.63 1.03 2.75 0 3.94-2.34 4.81-4.57 5.06.36.32.68.94.68 1.9 0 1.37-.01 2.47-.01 2.81 0 .27.18.6.69.49A10.02 10.02 0 0 0 22 12.25C22 6.58 17.52 2 12 2z"/></svg></a>
+          <a class="te-social" href="https://github.com/TechEveryday" target="_blank" rel="noopener" aria-label="Tech Everyday GitHub org"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="9" width="8" height="12" rx="1"/><rect x="13" y="3" width="8" height="18" rx="1"/><line x1="6" y1="13" x2="8" y2="13"/><line x1="6" y1="17" x2="8" y2="17"/><line x1="16" y1="7" x2="18" y2="7"/><line x1="16" y1="11" x2="18" y2="11"/></svg></a>
+          <a class="te-social" href="https://www.linkedin.com/in/alexander-p-73398610a" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5A2.5 2.5 0 1 0 5 8.5a2.5 2.5 0 0 0-.02-5zM3 9h4v12H3zM9 9h3.8v1.7h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V21h-4v-5.3c0-1.26-.02-2.9-1.76-2.9-1.77 0-2.04 1.38-2.04 2.8V21H9z"/></svg></a>
+          <a class="te-social" href="mailto:alexander@tech-everyday.com" aria-label="Email"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M4 7l8 6 8-6"/></svg></a>
+        </div>
+      </div>
+      <div class="te-g4" style="grid-template-columns:1fr 1fr">
+        <div class="card elev-sm"><span class="card-kicker">Based in</span><div class="card-title">Minnesota</div><div class="card-meta">Remote-first, US hours</div></div>
+        <div class="card elev-sm"><span class="card-kicker">Focus</span><div class="card-title">Full-stack</div><div class="card-meta">Web &amp; mobile products</div></div>
+        <div class="card elev-sm"><span class="card-kicker">Works with</span><div class="card-title">SMBs · founders</div><div class="card-meta">&amp; agencies (overflow)</div></div>
+        <div class="card elev-sm"><span class="card-kicker">Entity</span><div class="card-title">Tech Everyday LLC</div><div class="card-meta">Independent studio</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WRITING / BLOG -->
+  <section class="te-sec" id="writing" style="padding-top:0">
+    <div class="te-wrap">
+      <div style="display:flex;align-items:baseline;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:8px">
+        <div><span class="te-kick">Writing</span><h2 style="font-size:clamp(26px,3vw,34px);margin:12px 0 0">Notes from the build.</h2></div>
+        <span class="text-muted" style="font-size:13px">Sample posts — swap for real ones anytime</span>
+      </div>
+      <div style="margin-top:14px">
+        <a class="te-post" href="#">
+          <div style="display:flex;gap:10px;align-items:center"><span class="tag tag-outline">.NET</span><span class="card-meta te-mono">Feb 2026 · 6 min</span></div>
+          <div class="te-post-title">Shipping a .NET API with clean architecture</div>
+          <p class="text-muted" style="margin:0;max-width:640px">How I structure C# services so they stay easy to change a year after launch.</p>
+        </a>
+        <a class="te-post" href="#">
+          <div style="display:flex;gap:10px;align-items:center"><span class="tag tag-outline">AI</span><span class="card-meta te-mono">Jan 2026 · 8 min</span></div>
+          <div class="te-post-title">Practical agentic AI for small products</div>
+          <p class="text-muted" style="margin:0;max-width:640px">Where agent workflows genuinely earn their keep — and where a plain function call wins.</p>
+        </a>
+        <a class="te-post" href="#">
+          <div style="display:flex;gap:10px;align-items:center"><span class="tag tag-outline">Frontend</span><span class="card-meta te-mono">Dec 2025 · 5 min</span></div>
+          <div class="te-post-title">Vue or Angular for a client build in 2026</div>
+          <p class="text-muted" style="margin:0;max-width:640px">A working checklist for picking the right front-end framework per engagement.</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="te-sec" id="contact" style="padding-top:0">
+    <div class="te-wrap">
+      <div class="card elev-md" style="background:linear-gradient(150deg,var(--color-section),var(--color-surface));padding:0;overflow:hidden">
+        <div class="te-g2" style="gap:0;align-items:stretch">
+          <div style="padding:40px">
+            <span class="te-kick">Contact</span>
+            <h2 style="font-size:clamp(26px,3vw,34px);margin:12px 0 14px">Have something to build?</h2>
+            <p class="te-lede" style="margin:0 0 22px">Tell me a little about the project and I'll reply within a day. Prefer email? Reach me directly.</p>
+            <a class="btn btn-secondary" href="mailto:alexander@tech-everyday.com">alexander@tech-everyday.com</a>
+            <div style="display:flex;gap:10px;margin-top:22px">
+              <a class="te-social" href="https://github.com/viraphilavong" target="_blank" rel="noopener" aria-label="GitHub"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.58 2 12.25c0 4.53 2.87 8.37 6.84 9.73.5.1.68-.22.68-.49 0-.24-.01-.87-.01-1.71-2.78.62-3.37-1.37-3.37-1.37-.45-1.18-1.11-1.49-1.11-1.49-.91-.64.07-.63.07-.63 1 .07 1.53 1.06 1.53 1.06.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.37-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.71 0 0 .84-.28 2.75 1.05a9.36 9.36 0 0 1 2.5-.34c.85 0 1.71.12 2.5.34 1.91-1.33 2.75-1.05 2.75-1.05.55 1.41.2 2.45.1 2.71.64.72 1.03 1.63 1.03 2.75 0 3.94-2.34 4.81-4.57 5.06.36.32.68.94.68 1.9 0 1.37-.01 2.47-.01 2.81 0 .27.18.6.69.49A10.02 10.02 0 0 0 22 12.25C22 6.58 17.52 2 12 2z"/></svg></a>
+              <a class="te-social" href="https://www.linkedin.com/in/alexander-p-73398610a" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5A2.5 2.5 0 1 0 5 8.5a2.5 2.5 0 0 0-.02-5zM3 9h4v12H3zM9 9h3.8v1.7h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V21h-4v-5.3c0-1.26-.02-2.9-1.76-2.9-1.77 0-2.04 1.38-2.04 2.8V21H9z"/></svg></a>
+            </div>
+          </div>
+          <div style="padding:40px;background:color-mix(in srgb,var(--color-bg) 55%,transparent)">
+            <div *ngIf="submitted" style="height:100%;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;gap:12px;min-height:280px">
+              <div class="te-svc-ico" style="width:48px;height:48px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></div>
+              <h3 style="font-size:22px;margin:0">Thanks — message sent.</h3>
+              <p class="text-muted" style="margin:0">I'll get back to you within a day at the email you provided.</p>
+            </div>
+            <form *ngIf="!submitted" (submit)="onSubmit($event)" novalidate style="display:flex;flex-direction:column;gap:16px">
+              <div class="field">
+                <label>Name</label>
+                <input class="input" [value]="name" (input)="setField('name', $any($event.target).value)" placeholder="Your name" [attr.aria-invalid]="!!errors.name">
+                <span class="te-err" *ngIf="errors.name">{{ errors.name }}</span>
+              </div>
+              <div class="field">
+                <label>Email</label>
+                <input class="input" type="email" [value]="email" (input)="setField('email', $any($event.target).value)" placeholder="you@company.com" [attr.aria-invalid]="!!errors.email">
+                <span class="te-err" *ngIf="errors.email">{{ errors.email }}</span>
+              </div>
+              <div class="field">
+                <label>Project</label>
+                <textarea class="input" [value]="message" (input)="setField('message', $any($event.target).value)" placeholder="What are you building, and how can I help?" [attr.aria-invalid]="!!errors.message"></textarea>
+                <span class="te-err" *ngIf="errors.message">{{ errors.message }}</span>
+              </div>
+              <button class="btn btn-primary btn-block" type="submit" style="color:var(--color-accent)">Send message</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="te-foot">
+    <div class="te-wrap" style="display:flex;align-items:center;gap:20px;flex-wrap:wrap">
+      <a class="te-brand" href="#top" style="font-size:16px"><span class="te-dot"></span>Tech Everyday</a>
+      <nav class="te-links" style="display:flex;gap:22px;margin-left:0">
+        <a href="#services">Services</a><a href="#work">Work</a><a href="#about">About</a><a href="#writing">Writing</a><a href="#contact">Contact</a>
+      </nav>
+      <span class="te-mono text-muted" style="margin-left:auto;font-size:12.5px">© 2026 Tech Everyday LLC · Minnesota</span>
+    </div>
   </footer>
-  <svg id="clouds" xmlns="http://www.w3.org/2000/svg" width="2611.084" height="485.677" viewBox="0 0 2611.084 485.677">
-    <title>Gray Clouds Background</title>
-    <path id="Path_39" data-name="Path 39"
-      d="M2379.709,863.793c10-93-77-171-168-149-52-114-225-105-264,15-75,3-140,59-152,133-30,2.83-66.725,9.829-93.5,26.25-26.771-16.421-63.5-23.42-93.5-26.25-12-74-77-130-152-133-39-120-212-129-264-15-54.084-13.075-106.753,9.173-138.488,48.9-31.734-39.726-84.4-61.974-138.487-48.9-52-114-225-105-264,15a162.027,162.027,0,0,0-103.147,43.044c-30.633-45.365-87.1-72.091-145.206-58.044-52-114-225-105-264,15-75,3-140,59-152,133-53,5-127,23-130,83-2,42,35,72,70,86,49,20,106,18,157,5a165.625,165.625,0,0,0,120,0c47,94,178,113,251,33,61.112,8.015,113.854-5.72,150.492-29.764a165.62,165.62,0,0,0,110.861-3.236c47,94,178,113,251,33,31.385,4.116,60.563,2.495,86.487-3.311,25.924,5.806,55.1,7.427,86.488,3.311,73,80,204,61,251-33a165.625,165.625,0,0,0,120,0c51,13,108,15,157-5a147.188,147.188,0,0,0,33.5-18.694,147.217,147.217,0,0,0,33.5,18.694c49,20,106,18,157,5a165.625,165.625,0,0,0,120,0c47,94,178,113,251,33C2446.709,1093.793,2554.709,922.793,2379.709,863.793Z"
-      transform="translate(142.69 -634.312)" fill="#eee" />
-  </svg>
 </div>
-<router-outlet></router-outlet>
