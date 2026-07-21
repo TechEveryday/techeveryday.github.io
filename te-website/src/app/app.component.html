@@ -152,18 +152,33 @@
     </div>
   </section>
 
-  <!-- WRITING / BLOG -->
+  <!-- WRITING / BLOG — latest posts pulled live from the blog's feed -->
   <section class="te-sec" id="writing" style="padding-top:0">
     <div class="te-wrap">
-      <div style="display:flex;align-items:baseline;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:8px">
-        <div><span class="te-kick">Writing</span><h2 style="font-size:clamp(26px,3vw,34px);margin:12px 0 0">Notes from the build.</h2></div>
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:6px">
+        <span class="te-kick">Writing</span>
         <a class="btn btn-ghost" href="https://learn.tech-everyday.com/" target="_blank" rel="noopener" style="color:var(--color-accent)">Visit the blog →</a>
       </div>
-      <a class="card elev-sm te-proj" href="https://learn.tech-everyday.com/" target="_blank" rel="noopener" style="margin-top:14px">
+
+      <p *ngIf="postsState === 'loading'" class="text-muted" style="margin-top:14px">Loading posts…</p>
+
+      <div *ngIf="postsState === 'loaded'">
+        <a class="te-post" *ngFor="let p of posts" [href]="p.url" target="_blank" rel="noopener">
+          <div style="display:flex;gap:10px;align-items:center">
+            <span class="tag tag-outline" *ngIf="p.tag">{{ p.tag }}</span>
+            <span class="card-meta te-mono" *ngIf="p.date">{{ p.date }}</span>
+          </div>
+          <div class="te-post-title">{{ p.title }}</div>
+          <p class="text-muted" style="margin:0;max-width:640px" *ngIf="p.snippet">{{ p.snippet }}</p>
+        </a>
+      </div>
+
+      <!-- Fallback so the section is never broken if the feed can't be reached -->
+      <a *ngIf="postsState === 'error'" class="card elev-sm te-proj" href="https://learn.tech-everyday.com/" target="_blank" rel="noopener" style="margin-top:14px">
         <span class="card-kicker">learn.tech-everyday.com</span>
         <div class="card-title">The Tech Everyday blog</div>
-        <p class="card-body">Practical write-ups on building and shipping software — C#/.NET, TypeScript front ends, and agentic AI.</p>
-        <div class="card-meta te-mono">Read the latest posts →</div>
+        <p class="card-body">Read the latest posts over on the blog.</p>
+        <div class="card-meta te-mono">Visit the blog →</div>
       </a>
     </div>
   </section>
