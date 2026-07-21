@@ -24,6 +24,8 @@ type Field = 'name' | 'email' | 'message';
 })
 export class AppComponent {
   menuOpen = false;
+  // Flip to true once there's a real blog to link to.
+  showWriting = false;
   filter = 'All';
   name = '';
   email = '';
