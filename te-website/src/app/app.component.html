@@ -31,14 +31,14 @@
     <div class="te-wrap">
       <span class="te-kick">Full-stack software studio · Minnesota</span>
       <h1 style="font-size:clamp(34px,4.6vw,56px);line-height:1.05;letter-spacing:-.025em;margin:16px 0 0;max-width:760px">Ship reliable web apps — without hiring a whole team.</h1>
-      <p class="te-lede" style="max-width:560px;margin:20px 0 0">Tech Everyday is a one-person studio building and shipping production software for founders, small businesses, and agencies who need senior full-stack work done right.</p>
+      <p class="te-lede" style="max-width:560px;margin:20px 0 0">Tech Everyday is a one-person studio building and shipping production software for founders, small businesses, and agencies who need full-stack work done right.</p>
     </div>
     <div class="te-wrap" style="margin-top:36px">
       <div class="te-bento">
         <div class="card elev-sm sp2 sp2r" style="justify-content:space-between;background:linear-gradient(150deg,var(--color-section),var(--color-surface));min-height:260px">
           <span class="card-kicker">Tech Everyday LLC</span>
           <div>
-            <h3 style="font-size:23px;margin:0 0 10px;line-height:1.2">One senior engineer, front end to database.</h3>
+            <h3 style="font-size:23px;margin:0 0 10px;line-height:1.2">One engineer, front end to database.</h3>
             <p style="color:var(--color-neutral-300);font-size:14px;margin:0">Product builds, backend APIs, modern front ends, and practical AI — from the first wireframe to production and beyond.</p>
           </div>
           <div style="display:flex;gap:10px;flex-wrap:wrap">
@@ -135,7 +135,7 @@
         <span class="te-kick">About</span>
         <h2 style="font-size:clamp(26px,3vw,34px);margin:12px 0 16px">Hi, I'm Alexander — the engineer behind Tech Everyday.</h2>
         <p class="te-lede" style="margin:0 0 14px">I'm a fullstack software engineer based in Minnesota with 10+ years building web and mobile products across the stack — C#/.NET services, TypeScript front ends in Vue and Angular, and increasingly, agentic AI.</p>
-        <p style="color:var(--color-neutral-300);margin:0 0 22px">Tech Everyday LLC is how I take on focused client work: senior engineering without the agency overhead, for teams that want something built properly and shipped.</p>
+        <p style="color:var(--color-neutral-300);margin:0 0 22px">Tech Everyday LLC is how I take on focused client work: engineering without the agency overhead, for teams that want something built properly and shipped.</p>
         <div style="display:flex;gap:10px;flex-wrap:wrap">
           <a class="te-social" href="https://github.com/viraphilavong" target="_blank" rel="noopener" aria-label="Personal GitHub"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.58 2 12.25c0 4.53 2.87 8.37 6.84 9.73.5.1.68-.22.68-.49 0-.24-.01-.87-.01-1.71-2.78.62-3.37-1.37-3.37-1.37-.45-1.18-1.11-1.49-1.11-1.49-.91-.64.07-.63.07-.63 1 .07 1.53 1.06 1.53 1.06.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.37-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.71 0 0 .84-.28 2.75 1.05a9.36 9.36 0 0 1 2.5-.34c.85 0 1.71.12 2.5.34 1.91-1.33 2.75-1.05 2.75-1.05.55 1.41.2 2.45.1 2.71.64.72 1.03 1.63 1.03 2.75 0 3.94-2.34 4.81-4.57 5.06.36.32.68.94.68 1.9 0 1.37-.01 2.47-.01 2.81 0 .27.18.6.69.49A10.02 10.02 0 0 0 22 12.25C22 6.58 17.52 2 12 2z"/></svg></a>
           <a class="te-social" href="https://github.com/TechEveryday" target="_blank" rel="noopener" aria-label="Tech Everyday GitHub org"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="9" width="8" height="12" rx="1"/><rect x="13" y="3" width="8" height="18" rx="1"/><line x1="6" y1="13" x2="8" y2="13"/><line x1="6" y1="17" x2="8" y2="17"/><line x1="16" y1="7" x2="18" y2="7"/><line x1="16" y1="11" x2="18" y2="11"/></svg></a>
@@ -152,18 +152,33 @@
     </div>
   </section>
 
-  <!-- WRITING / BLOG -->
+  <!-- WRITING / BLOG — latest posts pulled live from the blog's feed -->
   <section class="te-sec" id="writing" style="padding-top:0">
     <div class="te-wrap">
-      <div style="display:flex;align-items:baseline;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:8px">
-        <div><span class="te-kick">Writing</span><h2 style="font-size:clamp(26px,3vw,34px);margin:12px 0 0">Notes from the build.</h2></div>
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:6px">
+        <span class="te-kick">Writing</span>
         <a class="btn btn-ghost" href="https://learn.tech-everyday.com/" target="_blank" rel="noopener" style="color:var(--color-accent)">Visit the blog →</a>
       </div>
-      <a class="card elev-sm te-proj" href="https://learn.tech-everyday.com/" target="_blank" rel="noopener" style="margin-top:14px">
+
+      <p *ngIf="postsState === 'loading'" class="text-muted" style="margin-top:14px">Loading posts…</p>
+
+      <div *ngIf="postsState === 'loaded'">
+        <a class="te-post" *ngFor="let p of posts" [href]="p.url" target="_blank" rel="noopener">
+          <div style="display:flex;gap:10px;align-items:center">
+            <span class="tag tag-outline" *ngIf="p.tag">{{ p.tag }}</span>
+            <span class="card-meta te-mono" *ngIf="p.date">{{ p.date }}</span>
+          </div>
+          <div class="te-post-title">{{ p.title }}</div>
+          <p class="text-muted" style="margin:0;max-width:640px" *ngIf="p.snippet">{{ p.snippet }}</p>
+        </a>
+      </div>
+
+      <!-- Fallback so the section is never broken if the feed can't be reached -->
+      <a *ngIf="postsState === 'error'" class="card elev-sm te-proj" href="https://learn.tech-everyday.com/" target="_blank" rel="noopener" style="margin-top:14px">
         <span class="card-kicker">learn.tech-everyday.com</span>
         <div class="card-title">The Tech Everyday blog</div>
-        <p class="card-body">Practical write-ups on building and shipping software — C#/.NET, TypeScript front ends, and agentic AI.</p>
-        <div class="card-meta te-mono">Read the latest posts →</div>
+        <p class="card-body">Read the latest posts over on the blog.</p>
+        <div class="card-meta te-mono">Visit the blog →</div>
       </a>
     </div>
   </section>
