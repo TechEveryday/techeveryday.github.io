@@ -8,7 +8,7 @@
         <a href="#work">Work</a>
         <a href="#stack">Stack</a>
         <a href="#about">About</a>
-        <a href="#writing" *ngIf="showWriting">Writing</a>
+        <a href="#writing">Writing</a>
         <a class="btn btn-primary" href="#contact" style="color:var(--color-accent)">Start a project</a>
       </nav>
       <button class="te-burger" (click)="toggleMenu()" aria-label="Menu">
@@ -20,7 +20,7 @@
       <a href="#work" (click)="closeMenu()">Work</a>
       <a href="#stack" (click)="closeMenu()">Stack</a>
       <a href="#about" (click)="closeMenu()">About</a>
-      <a href="#writing" (click)="closeMenu()" *ngIf="showWriting">Writing</a>
+      <a href="#writing" (click)="closeMenu()">Writing</a>
       <a href="#contact" (click)="closeMenu()" style="color:var(--color-accent);border-bottom:none">Start a project →</a>
     </nav>
   </header>
@@ -152,30 +152,19 @@
     </div>
   </section>
 
-  <!-- WRITING / BLOG — hidden until there's a real blog (toggle showWriting) -->
-  <section class="te-sec" id="writing" style="padding-top:0" *ngIf="showWriting">
+  <!-- WRITING / BLOG -->
+  <section class="te-sec" id="writing" style="padding-top:0">
     <div class="te-wrap">
       <div style="display:flex;align-items:baseline;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:8px">
         <div><span class="te-kick">Writing</span><h2 style="font-size:clamp(26px,3vw,34px);margin:12px 0 0">Notes from the build.</h2></div>
-        <span class="text-muted" style="font-size:13px">Sample posts — swap for real ones anytime</span>
+        <a class="btn btn-ghost" href="https://learn.tech-everyday.com/" target="_blank" rel="noopener" style="color:var(--color-accent)">Visit the blog →</a>
       </div>
-      <div style="margin-top:14px">
-        <a class="te-post" href="#">
-          <div style="display:flex;gap:10px;align-items:center"><span class="tag tag-outline">.NET</span><span class="card-meta te-mono">Feb 2026 · 6 min</span></div>
-          <div class="te-post-title">Shipping a .NET API with clean architecture</div>
-          <p class="text-muted" style="margin:0;max-width:640px">How I structure C# services so they stay easy to change a year after launch.</p>
-        </a>
-        <a class="te-post" href="#">
-          <div style="display:flex;gap:10px;align-items:center"><span class="tag tag-outline">AI</span><span class="card-meta te-mono">Jan 2026 · 8 min</span></div>
-          <div class="te-post-title">Practical agentic AI for small products</div>
-          <p class="text-muted" style="margin:0;max-width:640px">Where agent workflows genuinely earn their keep — and where a plain function call wins.</p>
-        </a>
-        <a class="te-post" href="#">
-          <div style="display:flex;gap:10px;align-items:center"><span class="tag tag-outline">Frontend</span><span class="card-meta te-mono">Dec 2025 · 5 min</span></div>
-          <div class="te-post-title">Vue or Angular for a client build in 2026</div>
-          <p class="text-muted" style="margin:0;max-width:640px">A working checklist for picking the right front-end framework per engagement.</p>
-        </a>
-      </div>
+      <a class="card elev-sm te-proj" href="https://learn.tech-everyday.com/" target="_blank" rel="noopener" style="margin-top:14px">
+        <span class="card-kicker">learn.tech-everyday.com</span>
+        <div class="card-title">The Tech Everyday blog</div>
+        <p class="card-body">Practical write-ups on building and shipping software — C#/.NET, TypeScript front ends, and agentic AI.</p>
+        <div class="card-meta te-mono">Read the latest posts →</div>
+      </a>
     </div>
   </section>
 
@@ -229,7 +218,7 @@
     <div class="te-wrap" style="display:flex;align-items:center;gap:20px;flex-wrap:wrap">
       <a class="te-brand" href="#top" style="font-size:16px"><span class="te-dot"></span>Tech Everyday</a>
       <nav class="te-links" style="display:flex;gap:22px;margin-left:0">
-        <a href="#services">Services</a><a href="#work">Work</a><a href="#about">About</a><a href="#writing" *ngIf="showWriting">Writing</a><a href="#contact">Contact</a>
+        <a href="#services">Services</a><a href="#work">Work</a><a href="#about">About</a><a href="#writing">Writing</a><a href="#contact">Contact</a>
       </nav>
       <span class="te-mono text-muted" style="margin-left:auto;font-size:12.5px">© 2026 Tech Everyday LLC · Minnesota</span>
     </div>
