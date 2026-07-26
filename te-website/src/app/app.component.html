@@ -6,9 +6,7 @@
       <nav class="te-links">
         <a href="#services">Services</a>
         <a href="#work">Work</a>
-        <a href="#stack">Stack</a>
         <a href="#about">About</a>
-        <a href="#writing">Writing</a>
         <a class="btn btn-primary" href="#contact" style="color:var(--color-accent)">Start a project</a>
       </nav>
       <button class="te-burger" (click)="toggleMenu()" aria-label="Menu">
@@ -18,9 +16,7 @@
     <nav class="te-mobile" *ngIf="menuOpen">
       <a href="#services" (click)="closeMenu()">Services</a>
       <a href="#work" (click)="closeMenu()">Work</a>
-      <a href="#stack" (click)="closeMenu()">Stack</a>
       <a href="#about" (click)="closeMenu()">About</a>
-      <a href="#writing" (click)="closeMenu()">Writing</a>
       <a href="#contact" (click)="closeMenu()" style="color:var(--color-accent);border-bottom:none">Start a project →</a>
     </nav>
   </header>
@@ -115,19 +111,6 @@
     </div>
   </section>
 
-  <!-- STACK -->
-  <section class="te-sec" id="stack" style="padding-top:0">
-    <div class="te-wrap">
-      <div class="card elev-sm" style="padding:30px">
-        <span class="te-kick">Stack</span>
-        <h2 style="font-size:clamp(24px,2.6vw,30px);margin:12px 0 18px;max-width:640px">A pragmatic toolkit, chosen to ship and to last.</h2>
-        <div style="display:flex;flex-wrap:wrap;gap:10px">
-          <span class="tag tag-neutral">C# / .NET</span><span class="tag tag-neutral">TypeScript</span><span class="tag tag-neutral">Vue</span><span class="tag tag-neutral">Angular</span><span class="tag tag-neutral">Ionic</span><span class="tag tag-neutral">Node</span><span class="tag tag-accent">Agentic AI</span><span class="tag tag-neutral">PostgreSQL</span><span class="tag tag-neutral">SQL Server</span><span class="tag tag-neutral">Azure</span><span class="tag tag-neutral">Docker</span><span class="tag tag-neutral">Git</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- ABOUT -->
   <section class="te-sec" id="about" style="padding-top:0">
     <div class="te-wrap te-g2" style="align-items:center">
@@ -149,37 +132,6 @@
         <div class="card elev-sm"><span class="card-kicker">Works with</span><div class="card-title">SMBs · founders</div><div class="card-meta">&amp; agencies (overflow)</div></div>
         <div class="card elev-sm"><span class="card-kicker">Entity</span><div class="card-title">Tech Everyday LLC</div><div class="card-meta">Independent studio</div></div>
       </div>
-    </div>
-  </section>
-
-  <!-- WRITING / BLOG — latest posts pulled live from the blog's feed -->
-  <section class="te-sec" id="writing" style="padding-top:0">
-    <div class="te-wrap">
-      <div style="display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:6px">
-        <span class="te-kick">Writing</span>
-        <a class="btn btn-ghost" href="https://learn.tech-everyday.com/" target="_blank" rel="noopener" style="color:var(--color-accent)">Visit the blog →</a>
-      </div>
-
-      <p *ngIf="postsState === 'loading'" class="text-muted" style="margin-top:14px">Loading posts…</p>
-
-      <div *ngIf="postsState === 'loaded'">
-        <a class="te-post" *ngFor="let p of posts" [href]="p.url" target="_blank" rel="noopener">
-          <div style="display:flex;gap:10px;align-items:center">
-            <span class="tag tag-outline" *ngIf="p.tag">{{ p.tag }}</span>
-            <span class="card-meta te-mono" *ngIf="p.date">{{ p.date }}</span>
-          </div>
-          <div class="te-post-title">{{ p.title }}</div>
-          <p class="text-muted" style="margin:0;max-width:640px" *ngIf="p.snippet">{{ p.snippet }}</p>
-        </a>
-      </div>
-
-      <!-- Fallback so the section is never broken if the feed can't be reached -->
-      <a *ngIf="postsState === 'error'" class="card elev-sm te-proj" href="https://learn.tech-everyday.com/" target="_blank" rel="noopener" style="margin-top:14px">
-        <span class="card-kicker">learn.tech-everyday.com</span>
-        <div class="card-title">The Tech Everyday blog</div>
-        <p class="card-body">Read the latest posts over on the blog.</p>
-        <div class="card-meta te-mono">Visit the blog →</div>
-      </a>
     </div>
   </section>
 
@@ -233,7 +185,7 @@
     <div class="te-wrap" style="display:flex;align-items:center;gap:20px;flex-wrap:wrap">
       <a class="te-brand" href="#top" style="font-size:16px"><span class="te-dot"></span>Tech Everyday</a>
       <nav class="te-links" style="display:flex;gap:22px;margin-left:0">
-        <a href="#services">Services</a><a href="#work">Work</a><a href="#about">About</a><a href="#writing">Writing</a><a href="#contact">Contact</a>
+        <a href="#services">Services</a><a href="#work">Work</a><a href="#about">About</a><a href="#contact">Contact</a>
       </nav>
       <span class="te-mono text-muted" style="margin-left:auto;font-size:12.5px">© 2026 Tech Everyday LLC · Minnesota</span>
     </div>
