@@ -1,13 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-
-interface BlogPost {
-  title: string;
-  url: string;
-  date: string;
-  tag?: string;
-  snippet: string;
-}
+import { Component } from '@angular/core';
 
 interface Project {
   name: string;
@@ -31,7 +22,7 @@ type Field = 'name' | 'email' | 'message';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
   menuOpen = false;
   filter = 'All';
   name = '';
@@ -39,59 +30,6 @@ export class AppComponent implements OnInit {
   message = '';
   errors: FormErrors = {};
   submitted = false;
-
-  // Blog posts pulled live from the Blogger feed (JSONP — the feed has no CORS headers).
-  posts: BlogPost[] = [];
-  postsState: 'loading' | 'loaded' | 'error' = 'loading';
-
-  private readonly feedUrl =
-    'https://learn.tech-everyday.com/feeds/posts/default?alt=json-in-script&max-results=4';
-
-  constructor(private http: HttpClient) {}
-
-  ngOnInit(): void {
-    this.http.jsonp<any>(this.feedUrl, 'callback').subscribe({
-      next: data => {
-        this.posts = this.parseFeed(data);
-        this.postsState = this.posts.length ? 'loaded' : 'error';
-      },
-      error: () => {
-        this.postsState = 'error';
-      },
-    });
-  }
-
-  private parseFeed(data: any): BlogPost[] {
-    const entries: any[] = data?.feed?.entry ?? [];
-    return entries.map(e => {
-      const links: any[] = e.link ?? [];
-      return {
-        title: e.title?.$t ?? 'Untitled',
-        url: links.find(l => l.rel === 'alternate')?.href ?? 'https://learn.tech-everyday.com/',
-        date: this.formatDate(e.published?.$t ?? ''),
-        tag: (e.category ?? [])[0]?.term,
-        snippet: this.snippet(e.summary?.$t ?? e.content?.$t ?? ''),
-      };
-    });
-  }
-
-  private formatDate(iso: string): string {
-    if (!iso) {
-      return '';
-    }
-    const d = new Date(iso);
-    return isNaN(d.getTime())
-      ? ''
-      : d.toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
-  }
-
-  private snippet(html: string): string {
-    // DOMParser doesn't run scripts or fetch resources — safe for untrusted feed HTML.
-    const text = (new DOMParser().parseFromString(html, 'text/html').body.textContent ?? '')
-      .replace(/\s+/g, ' ')
-      .trim();
-    return text.length > 140 ? text.slice(0, 140).trimEnd() + '…' : text;
-  }
 
   readonly categories = ['All', 'Web', 'Backend', 'Mobile', 'AI'];
 
