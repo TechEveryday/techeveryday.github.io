@@ -42,12 +42,12 @@ export class AppComponent {
     {
       name: 'ionic-angular', cat: 'Mobile', tags: 'TypeScript · Ionic', label: 'Ionic mobile app',
       href: 'https://github.com/TechEveryday/ionic-angular',
-      blurb: 'Cross-platform mobile app on Ionic + Angular — one codebase for iOS and Android.'
+      blurb: 'Cross-platform mobile app on Ionic + Angular - one codebase for iOS and Android.'
     },
     {
       name: 'odd-one-out', cat: 'Web', tags: 'Vue · SPA', label: 'Vue card game',
       href: 'https://github.com/TechEveryday/odd-one-out',
-      blurb: 'A multiplayer card game built in Vue — design, game logic, and UI end to end.'
+      blurb: 'A multiplayer card game built in Vue - design, game logic, and UI end to end.'
     },
     {
       name: 'agentic-ai-journey', cat: 'AI', tags: 'TypeScript · LLM', label: 'Agentic AI',
