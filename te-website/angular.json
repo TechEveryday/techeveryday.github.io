@@ -22,7 +22,12 @@
             "tsConfig": "tsconfig.app.json",
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              {
+                "glob": "**/*",
+                "input": "src/my-sport-assistant",
+                "output": "my-sport-assistant"
+              }
             ],
             "styles": [
               "src/custom-theme.scss",

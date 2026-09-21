@@ -1,0 +1,121 @@
+/*
+ * Shared by index.html and privacy.html. Inlined <link>, no CDN and no web font:
+ * these pages are the privacy policy for an app whose whole promise is "collects
+ * nothing", and a Google Fonts request would phone home from the very page that
+ * says it doesn't. Everything here is self-hosted or a system font.
+ *
+ * Tokens mirror src/theme/theme.ts so the site reads as the same product. They are
+ * duplicated rather than imported — this is a static page with no build step, and
+ * the two drifting slightly matters far less than adding tooling to docs/.
+ */
+
+:root {
+  --accent: #2f6bea;
+  --ink: #17181b;
+  --sub: #71757c;
+  --line: rgba(20, 22, 28, 0.09);
+  --bg: #f4f5f6;
+  --surface: #ffffff;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --accent: #6f9bff;
+    --ink: #f1f2f4;
+    --sub: #a1a5ad;
+    --line: rgba(255, 255, 255, 0.12);
+    --bg: #17181b;
+    --surface: #202226;
+  }
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  padding: 0 20px 72px;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.65;
+  -webkit-text-size-adjust: 100%;
+}
+
+main {
+  max-width: 640px;   /* LIST_MAX in the app — prose strands at wider measures */
+  margin: 0 auto;
+}
+
+header {
+  padding: 56px 0 32px;
+  border-bottom: 1px solid var(--line);
+  margin-bottom: 32px;
+}
+
+h1 {
+  font-size: 27px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  margin: 0 0 8px;
+}
+
+h2 {
+  font-size: 21px;
+  font-weight: 800;
+  margin: 40px 0 12px;
+}
+
+p, li { color: var(--ink); }
+
+.lede {
+  font-size: 18px;
+  color: var(--sub);
+  margin: 0;
+}
+
+.stamp {
+  font-size: 13px;
+  color: var(--sub);
+  margin: 16px 0 0;
+}
+
+a { color: var(--accent); }
+a:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 4px 24px 24px;
+  margin: 24px 0;
+}
+
+/* The one claim the whole policy rests on; it should read as the headline it is. */
+.claim {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--accent);
+  border-radius: 14px;
+  padding: 20px 24px;
+  margin: 24px 0;
+  font-size: 17px;
+  font-weight: 700;
+}
+
+ul { padding-left: 22px; }
+li { margin: 8px 0; }
+
+footer {
+  margin-top: 56px;
+  padding-top: 24px;
+  border-top: 1px solid var(--line);
+  font-size: 13px;
+  color: var(--sub);
+}
+
+footer a { margin-right: 16px; }
