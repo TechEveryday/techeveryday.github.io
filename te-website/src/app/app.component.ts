@@ -31,18 +31,13 @@ export class AppComponent {
   errors: FormErrors = {};
   submitted = false;
 
-  readonly categories = ['All', 'Web', 'Backend', 'Mobile', 'AI'];
+  readonly categories = ['All', 'Web', 'Backend', 'AI'];
 
   readonly projects: Project[] = [
     {
       name: 'dotnet_api', cat: 'Backend', tags: 'C# · .NET', label: '.NET REST API',
       href: 'https://github.com/TechEveryday/dotnet_api',
       blurb: 'A clean-architecture REST service in C# / .NET, built for reliability and easy extension.'
-    },
-    {
-      name: 'ionic-angular', cat: 'Mobile', tags: 'TypeScript · Ionic', label: 'Ionic mobile app',
-      href: 'https://github.com/TechEveryday/ionic-angular',
-      blurb: 'Cross-platform mobile app on Ionic + Angular - one codebase for iOS and Android.'
     },
     {
       name: 'odd-one-out', cat: 'Web', tags: 'Vue · SPA', label: 'Vue card game',
@@ -53,11 +48,6 @@ export class AppComponent {
       name: 'agentic-ai-journey', cat: 'AI', tags: 'TypeScript · LLM', label: 'Agentic AI',
       href: 'https://github.com/TechEveryday/agentic-ai-journey',
       blurb: 'Experiments turning LLMs into dependable agent workflows for real product features.'
-    },
-    {
-      name: 'viraphilavong.github.io', cat: 'Web', tags: 'Vue', label: 'Personal site',
-      href: 'https://github.com/viraphilavong/viraphilavong.github.io',
-      blurb: 'A personal site and playground built in Vue, iterating on layout and interaction ideas.'
     },
   ];
 
