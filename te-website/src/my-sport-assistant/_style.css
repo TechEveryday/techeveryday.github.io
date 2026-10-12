@@ -10,9 +10,9 @@
  */
 
 :root {
-  --accent: #2f6bea;
+  --accent: #2d67e2; /* was #2f6bea: 4.36:1 on --bg, under AA */
   --ink: #17181b;
-  --sub: #71757c;
+  --sub: #6b6f76;    /* was #71757c: 4.24:1 on --bg, under AA */
   --line: rgba(20, 22, 28, 0.09);
   --bg: #f4f5f6;
   --surface: #ffffff;
