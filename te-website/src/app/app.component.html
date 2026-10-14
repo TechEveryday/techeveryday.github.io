@@ -69,10 +69,7 @@
   <!-- WORK -->
   <section class="te-sec" id="work">
     <div class="te-wrap">
-      <div style="display:flex;align-items:baseline;justify-content:space-between;gap:16px;flex-wrap:wrap">
-        <div><span class="te-kick">Selected work</span><h2 style="font-size:clamp(26px,3vw,34px);margin:12px 0 0">Things I've designed and shipped.</h2></div>
-        <a class="btn btn-ghost" href="https://github.com/viraphilavong" target="_blank" rel="noopener" style="color:var(--color-accent)">GitHub →</a>
-      </div>
+      <div><span class="te-kick">Selected work</span><h2 style="font-size:clamp(26px,3vw,34px);margin:12px 0 0">Things I've designed and shipped.</h2></div>
       <div style="display:flex;flex-wrap:wrap;gap:9px;margin:24px 0 26px">
         <button class="te-chip" *ngFor="let c of categories" [attr.aria-current]="filter === c" (click)="setFilter(c)">{{ c }}</button>
       </div>
